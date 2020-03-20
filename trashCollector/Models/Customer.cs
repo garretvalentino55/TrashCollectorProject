@@ -13,7 +13,19 @@ namespace trashCollector.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public int StreetNumber { get; set; }
+        public string StreetName { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int ZipCode { get; set; }
+        public string PickUpDay { get; set; }
+        public DateTime OneTimePickUp { get; set; }
+        public DateTime TempSuspendStart { get; set; }
+        public DateTime TempSuspendEnd { get; set; }
+        public double AmountOwed { get; set; }
+        public bool PickupConfirmed { get; set; }
 
+       
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser identityUser { get; set; }
