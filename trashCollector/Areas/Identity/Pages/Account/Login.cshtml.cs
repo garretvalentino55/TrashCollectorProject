@@ -83,6 +83,8 @@ namespace trashCollector.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    //if (_userManager.IsInRoleAsync(_userManager.Users.Where(s => s.Id == _userManager),"Customer")){ }
+                   // else if() { }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

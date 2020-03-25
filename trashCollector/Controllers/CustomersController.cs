@@ -49,7 +49,9 @@ namespace trashCollector.Controllers
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            Customer customer = new Customer();
+            _context.SaveChanges();
+            return View(customer);
         }
 
         // POST: Customers/Create
@@ -66,6 +68,7 @@ namespace trashCollector.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            _context.SaveChanges();
             return View(customer);
         }
 
@@ -83,6 +86,7 @@ namespace trashCollector.Controllers
                 return NotFound();
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            _context.SaveChanges();
             return View(customer);
         }
 
@@ -116,9 +120,10 @@ namespace trashCollector.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            _context.SaveChanges();
             return View(customer);
         }
 
@@ -149,8 +154,9 @@ namespace trashCollector.Controllers
             var customer = await _context.Customer.FindAsync(id);
             _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View (customer);
         }
+        
 
         private bool CustomerExists(int id)
         {
